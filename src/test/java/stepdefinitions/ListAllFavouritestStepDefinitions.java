@@ -4,20 +4,13 @@ import api.VoteAPI;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.http.ContentType;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.serenitybdd.screenplay.rest.interactions.Get;
 import net.thucydides.core.annotations.Steps;
-import search.LookForInformation;
-import search.WikipediaArticle;
 
-import static net.serenitybdd.rest.SerenityRest.given;
-import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
 import static org.hamcrest.CoreMatchers.is;
-import static io.restassured.RestAssured.baseURI;
 
 public class ListAllFavouritestStepDefinitions {
 
@@ -54,11 +47,12 @@ public class ListAllFavouritestStepDefinitions {
         actor = Actor.named("Tester the automation tester")
                 .whoCan(CallAnApi.at(voteAPI.invoke_my_webservice()));
 
-        actor.attemptsTo(
+        actor.attemptsTo(Get.resource("search"));
+        /*actor.attemptsTo(
                 Get.resource("votes")
                         .with(request ->
                                 request.header("x-api-key", x_api_key))
-        );
+        );*/
     }
 
 
